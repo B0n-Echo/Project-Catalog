@@ -1,25 +1,23 @@
 {
   "name": "project-catalog",
   "version": "1.0.0",
-  "description": "A Catalog of API endpoints, created using Nodejs",
-  "main": "server.js",
+  "private": true,
+  "description": "A Library Project",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/B0n-Echo/Project-Catalog.git"
-  },
-  "keywords": [
-    "Nodejs",
-    "Api",
-    "Catalog",
-    "Hobby-Project"
-  ],
-  "author": "Nikhilesh Pandey",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/B0n-Echo/Project-Catalog/issues"
-  },
-  "homepage": "https://github.com/B0n-Echo/Project-Catalog#readme"
+  "dependencies": {
+    "async": "^2.6.2",
+    "body-parser": "^1.19.2",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "^3.1.6",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "mongoose": "^5.5.2",
+    "morgan": "~1.9.1",
+    "request": "^2.88.2"
+  }
 }
