@@ -3,33 +3,32 @@
 // const { sanitizeBody } = require('express-validator/filter');
 const mongoose = require('mongoose');
 const async = require('async');
-// const googleBookSrvc = require('../services/googleBooksService');
-// const openLibBookSrvc = require('../services/openLibService');
-// const utilities = require('../utils/utilities');
-
+const googleBookSrvc = require('../services/googleBooksService');
+const openLibBookSrvc = require('../services/openLibService');
+const utilities = require('../utils/utilities');
+const createError = require('http-errors');
 
 exports.getBooksBySearch = function(req, res) {
-    // try {
-    //     let data_result = {};
-    //     let search = req.params.search;
-    //     let isISBNSearch =  utilities.analyseSearchInput(search);
+    try {
+        let data_result = {};
+        let search = req.params.search;
+        let authorname = req.params.authorname;
+        let isISBNSearch =  utilities.analyseSearchInput(search);
 
-
-
-    //     Promise.all([
-    //         isISBNSearch ? '' : googleBookSrvc.getBook(search,data_result ),
-    //         openLibBookSrvc.getBook(search, data_result)
-    //     ]).then(() => {
-    //         if (data_result) {
-    //             res.status(200).json(data_result);
-    //           }
+        Promise.all([
+            isISBNSearch ? '' : (authorname ? '' : googleBookSrvc.getBook(search, data_result )),
+            openLibBookSrvc.getBook(search, authorname,  data_result)
+        ]).then(() => {
+            if (data_result) {
+                res.status(200).json(data_result);
+              }
               
-    //         //   return { error: 'No book' };
-    //     }).catch(err => {
-    //         res.send(createError(400,err));
-    //     })
-    //   } catch (err) {
-    //     // if the search returns nothing, the Open Library server throws a 500 error!
-    //     return { error: err };
-    //   }
+            //   return { error: 'No book' };
+        }).catch(err => {
+            res.send(createError(400,err));
+        })
+      } catch (err) {
+        // if the search returns nothing, the Open Library server throws a 500 error!
+        return { error: err };
+      }
 };
