@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '..', 'views', 'index.html'));
 });
 
+router.get('/books',  book_controller.getbestsellers);
 router.get([`/books/:search`, `/books/author/:authorname`],  book_controller.getBooksBySearch);
-// router.get(,  book_controller.getBooksBySearch);
   
 module.exports = router;
